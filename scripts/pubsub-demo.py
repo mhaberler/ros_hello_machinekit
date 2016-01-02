@@ -79,8 +79,8 @@ def demo_callback(msg, pins):
   for field, obj in pins.iteritems():
     if type(obj) is list:
       values = msg.__getattribute__(field)
-      for pin in obj:
-        pin.set(values.pop())
+      for i in range(len(obj)):
+        pin[i].set(values[i])
     else:
       obj.set(msg.__getattribute__(field))
 
@@ -107,8 +107,8 @@ def demo_publisher(compname, prefix, msgtype, count=3):
 
 if __name__ == '__main__':
 
-  demo_publisher('test', 'jtp', JointTrajectoryPoint, count=3)
+  #demo_publisher('test', 'jtp', JointTrajectoryPoint, count=3)
 
   # mirrors the turtlesim demo pose as HAL pins:
-  #demo_subscriber("turtle1", "pose", "/turtle1/pose")
+  demo_subscriber("turtle1", "pose", "/turtle1/pose")
 
